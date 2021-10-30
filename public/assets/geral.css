@@ -1,0 +1,20 @@
+@media screen and (min-width: 768px) {
+    body > header {
+        min-height: 12vh;
+    }
+    body > header > nav {
+        min-height: 10vh;
+    }
+    body > div > aside,
+    body > div > main {
+        min-height: 80vh;
+    }
+    body > footer > div {
+        min-height: 5vh;
+    }
+}
+
+.list-group-item.active {
+    background-color: var(--gray);
+    border-color: var(--gray);
+}
