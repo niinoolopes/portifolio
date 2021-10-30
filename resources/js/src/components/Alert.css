@@ -1,0 +1,14 @@
+#alert {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    transition: all 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+#alert.active {
+    opacity: 1;
+    visibility: visible;
+}
