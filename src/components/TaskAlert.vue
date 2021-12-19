@@ -2,7 +2,7 @@
   <div v-show="tasksListEmpty || tasksEmpty" class="card ps-3 py-2 w-100">
     <p class="m-0">
       <span v-show="tasksListEmpty">lista vazia</span>
-      <span v-show="tasksEmpty">Nâo existe nenhuma tarefa</span>
+      <span v-show="tasksEmpty">Cadastre uma tarefa</span>
     </p>
   </div>
 </template>

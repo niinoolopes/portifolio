@@ -2,6 +2,7 @@
   <div id="app-filter-actions" class="btn-group mb-2">
     <button
       type="button"
+      :disabled="tasksEmpty"
       :class="css(1)"
       @click="() => $emit('onClickFilter', 1)"
     >
@@ -9,6 +10,7 @@
     </button>
     <button
       type="button"
+      :disabled="tasksEmpty"
       :class="css(2)"
       @click="() => $emit('onClickFilter', 2)"
     >
@@ -16,6 +18,7 @@
     </button>
     <button
       type="button"
+      :disabled="tasksEmpty"
       :class="css(3)"
       @click="() => $emit('onClickFilter', 3)"
     >
@@ -57,6 +60,10 @@ export default {
       type: Number,
       required: true,
     },
+    tasksEmpty: {
+      type: Boolean,
+      required: true,
+    }
   },
 
   methods: {
@@ -65,7 +72,7 @@ export default {
         this.filterActive === type
           ? "btn-secondary active"
           : "btn-outline-secondary";
-      return `btn ${cssActive}`;
+      return `btn btn-sm py-1 ${cssActive}`;
     },
   },
 };

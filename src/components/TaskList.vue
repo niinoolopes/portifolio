@@ -24,7 +24,7 @@
         @input="(e) => $emit('handleInput', [task.id, 'text', e.target.value])"
       />
       <button
-        class="btn btn-sm d-flex py-2 px-3"
+        class="btn btn-sm d-flex pt-2"
         @click="() => $emit('removeTask', task.id)"
       >
         <i class="fa fa-trash"></i>
@@ -43,7 +43,6 @@ export default {
       default: [],
     },
   },
-  methods: {},
 };
 </script>
 

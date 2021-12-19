@@ -1,10 +1,15 @@
 <template>
   <div id="app" class="container">
-    <Header />
+    <Header @resetTask="resetTask" />
     <hr class="mt-0 mb-3" />
     <Main>
-      <FormTask @addTaks="addTaks" />
-      <TaskFilter :filterActive="filterActive" @onClickFilter="onClickFilter" />
+      <FormTask ref="formTask" @addTaks="addTaks" />
+
+      <TaskFilter
+        :filterActive="filterActive"
+        :tasksEmpty="tasksEmpty"
+        @onClickFilter="onClickFilter"
+      />
 
       <TaskList
         v-if="tasks.length > 0"
@@ -12,11 +17,8 @@
         @handleInput="handleInput"
         @removeTask="removeTask"
       />
-      
-      <TaskAlert
-        :tasksListEmpty="tasksListEmpty"
-        :tasksEmpty="tasksEmpty"
-      />
+
+      <TaskAlert :tasksListEmpty="tasksListEmpty" :tasksEmpty="tasksEmpty" />
     </Main>
     <Footer />
   </div>
@@ -44,6 +46,7 @@ export default {
 
   data() {
     return {
+      debaunce: null,
       filterActive: 0,
       nextId: 0,
       tasks: [],
@@ -77,15 +80,20 @@ export default {
 
       this.tasksData = [...[newTask], ...this.tasksData];
 
-      this.filterActive = 1;
+      this.setBtnOpened();
     },
     removeTask(id = 0) {
       this.tasksData = [...this.tasksData].filter((el) => el.id !== id);
     },
+    resetTask() {
+      this.resetLocalStorage();
+
+      this.autoFocus();
+    },
 
     // EVENTS
     handleInput(parameters = []) {
-      const [id, key, value] = parameters;
+      let [id, key, value] = parameters;
 
       this.tasksData = [...this.tasksData].map((task) => {
         if (task?.id === id) {
@@ -93,21 +101,50 @@ export default {
         }
         return task;
       });
+
+      this.handleInputSelectFilter();
+    },
+    handleInputSelectFilter() {
+      const lengthOpened = [...this.tasksData].filter((e) => !e.status).length;
+      const lengthClosed = [...this.tasksData].filter((e) => e.status).length;
+
+      if (this.filterActive === 1 && lengthOpened === 0) {
+        this.setBtnClosed();
+        return false;
+      }
+
+      if (this.filterActive === 2 && lengthClosed === 0) {
+        this.setBtnOpened();
+        return false;
+      }
     },
     onClickFilter(type) {
       if (type === 1) {
-        this.filterActive = 1;
+        this.setBtnOpened();
         this.showTasksAbertas();
       }
       if (type === 2) {
-        this.filterActive = 2;
+        this.setBtnClosed();
         this.showTasksClesed();
       }
       if (type === 3) {
-        this.filterActive = 3;
+        this.setBtnAll();
         this.showAllTasks();
       }
       this.setLocalStorage();
+    },
+    autoFocus() {
+      this.$refs.formTask.autoFocus();
+    },
+
+    setBtnOpened() {
+      this.filterActive = 1;
+    },
+    setBtnClosed() {
+      this.filterActive = 2;
+    },
+    setBtnAll() {
+      this.filterActive = 3;
     },
 
     // LOCALSTORAGE
@@ -125,6 +162,15 @@ export default {
       });
       window.localStorage.setItem("nn-p-tarefas", data);
     },
+    resetLocalStorage() {
+      const data = JSON.stringify({
+        tasks: [],
+        filterActive: 1,
+      });
+      window.localStorage.setItem("nn-p-tarefas", data);
+
+      this.getLocalStorage();
+    },
 
     // FILTER
     showTasksAbertas() {
@@ -139,11 +185,22 @@ export default {
   },
 
   watch: {
-    tasksData() {
-      this.setLocalStorage();
-      this.filterActive == 1 && this.showTasksAbertas();
-      this.filterActive == 2 && this.showTasksClesed();
-      this.filterActive == 3 && this.showAllTasks();
+    tasksData(newtasksData) {
+      window.clearTimeout(this.debaunce);
+
+      this.debaunce = setTimeout(() => {
+        console.log('object')
+        this.setLocalStorage();
+        this.filterActive == 1 && this.showTasksAbertas();
+        this.filterActive == 2 && this.showTasksClesed();
+        this.filterActive == 3 && this.showAllTasks();
+
+        const isEmpty = newtasksData.length === 0;
+        if (isEmpty) {
+          this.autoFocus();
+          this.setBtnOpened();
+        }
+      }, 100);
     },
   },
 
