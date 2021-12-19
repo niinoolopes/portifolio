@@ -30,15 +30,13 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Header from "./components/communs/Header.vue";
 import Main from "./components/communs/Main.vue";
 import Footer from "./components/communs/Footer.vue";
 import FormTask from "./components/FormTask.vue";
 import TaskFilter from "./components/TaskFilter.vue";
 import TaskList from "./components/TaskList.vue";
-
-import { Task } from "./types";
 
 export default {
   components: {
@@ -54,17 +52,17 @@ export default {
     return {
       filterActive: 0,
       nextId: 0,
-      tasks: [] as Task[],
-      tasksData: [] as Task[],
+      tasks: [],
+      tasksData: [],
     };
   },
 
   methods: {
     // CRUD
-    addTaks(newTaks: Task) {
+    addTaks(newTaks = { text: "" }) {
       const hasTasks = this.tasksData.length > 0;
 
-      const lastTask: Task = hasTasks
+      const lastTask = hasTasks
         ? [...this.tasksData].slice(-1)[0]
         : { id: 0, text: "" };
 
@@ -80,22 +78,22 @@ export default {
 
       this.filterActive = 1;
     },
-    removeTask(id: Number) {
+    removeTask(id = 0) {
       this.tasksData = [...this.tasksData].filter((el) => el.id !== id);
     },
 
     // EVENTS
-    handleInput(parameters: [id: number, key: string, value: any]) {
+    handleInput(parameters = []) {
       const [id, key, value] = parameters;
 
-      this.tasksData = [...this.tasksData].map((task: any) => {
+      this.tasksData = [...this.tasksData].map((task) => {
         if (task?.id === id) {
           task[key] = value;
         }
         return task;
       });
     },
-    onClickFilter(type: number) {
+    onClickFilter(type) {
       if (type === 1) {
         this.filterActive = 1;
         this.showTasksAbertas();
