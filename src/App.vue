@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container">
     <Header />
+    <hr class="mt-0 mb-3" />
     <Main>
       <FormTask @addTaks="addTaks" />
       <TaskFilter :filterActive="filterActive" @onClickFilter="onClickFilter" />
@@ -11,20 +12,11 @@
         @handleInput="handleInput"
         @removeTask="removeTask"
       />
-
-      <div
-        v-if="tasks.length === 0 && tasksData.length > 0"
-        class="card ps-3 py-2"
-      >
-        <div>lista vazia</div>
-      </div>
-
-      <div
-        v-if="tasks.length === 0 && tasksData.length === 0"
-        class="card ps-3 py-2"
-      >
-        <div>Nâo existe nenhuma tarefa</div>
-      </div>
+      
+      <TaskAlert
+        :tasksListEmpty="tasksListEmpty"
+        :tasksEmpty="tasksEmpty"
+      />
     </Main>
     <Footer />
   </div>
@@ -37,6 +29,7 @@ import Footer from "./components/communs/Footer.vue";
 import FormTask from "./components/FormTask.vue";
 import TaskFilter from "./components/TaskFilter.vue";
 import TaskList from "./components/TaskList.vue";
+import TaskAlert from "./components/TaskAlert.vue";
 
 export default {
   components: {
@@ -46,6 +39,7 @@ export default {
     FormTask,
     TaskFilter,
     TaskList,
+    TaskAlert,
   },
 
   data() {
@@ -57,14 +51,21 @@ export default {
     };
   },
 
+  computed: {
+    tasksListEmpty() {
+      return this.tasks.length === 0 && this.tasksData.length > 0;
+    },
+    tasksEmpty() {
+      return this.tasks.length === 0 && this.tasksData.length === 0;
+    },
+  },
+
   methods: {
     // CRUD
     addTaks(newTaks = { text: "" }) {
-      const hasTasks = this.tasksData.length > 0;
+      const hasTasks = [...this.tasksData].length > 0;
 
-      const lastTask = hasTasks
-        ? [...this.tasksData].slice(-1)[0]
-        : { id: 0, text: "" };
+      const lastTask = hasTasks ? [...this.tasksData][0] : { id: 0, text: "" };
 
       const nextId = Number((lastTask.id || 0) + 1);
 
@@ -162,9 +163,5 @@ export default {
 
   width: 100vw;
   height: 100vh;
-
-  #app-main {
-    flex-grow: 1;
-  }
 }
 </style>

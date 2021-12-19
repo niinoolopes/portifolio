@@ -1,7 +1,7 @@
 <template>
-  <section id="form-task" class="mb-3">
+  <section id="form-task" class="mb-3 w-100">
     <form @submit.prevent="newTaks">
-      <div class="input-group mb-3">
+      <div class="input-group m-0">
         <input
           type="text"
           class="form-control form-control-sm"

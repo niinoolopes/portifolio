@@ -1,5 +1,5 @@
 <template>
-  <main id="app-main" class="py-3 border-top border-bottom">
+  <main id="app-main" class="p-2">
     <slot></slot>
   </main>
 </template>
@@ -9,3 +9,14 @@ export default {
   name: "Main",
 };
 </script>
+
+<style lang="scss" scopeed>
+#app-main {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+}
+</style>

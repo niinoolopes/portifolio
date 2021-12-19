@@ -1,5 +1,5 @@
 <template>
-  <section id="task-list" class="card ps-3 py-2">
+  <section id="task-list" class="card ps-3 py-2 w-100">
     <div v-for="task in tasks" :key="task.id" class="input-group my-2">
       <!-- <span class="p-2 input-group-id">
         {{ task.id }}
@@ -51,7 +51,6 @@ export default {
 #task-list {
   flex: 1;
   overflow-y: auto;
-  max-height: calc(100% - 80px);
 
   .input-group-id {
     min-width: 35px;
