@@ -1,4 +1,4 @@
-# app
+# vue2-localStorage-todo
 
 ## Project setup
 ```
