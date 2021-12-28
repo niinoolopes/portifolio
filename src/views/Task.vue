@@ -56,3 +56,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  width: 100vw;
+  height: 100vh;
+}
+</style>

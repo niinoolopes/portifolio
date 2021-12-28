@@ -40,7 +40,7 @@ export default {
     getFilter() {
       return this.$store.getters.getFilter;
     },
-    
+
     tasks() {
       console.log(this.getFilter);
       if (this.getFilter === "enable") {
@@ -53,7 +53,7 @@ export default {
 
       return this.$store.getters.getTasks;
     },
-    
+
     tasksEmpty() {
       return this.tasks.length > 0;
     },

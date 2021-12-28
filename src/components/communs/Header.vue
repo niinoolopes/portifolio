@@ -25,7 +25,11 @@ export default {
     },
     
     async resetTask() {
-      await this.$store.dispatch("resetTask", { context: this });
+      const confirm = window.confirm('deseja apagar todas as task? ao confirmar não poderá recuperar os dados.')
+
+      if(confirm) {
+        await this.$store.dispatch("resetTask", { context: this });
+      }
     },
 
     async signOut() {
