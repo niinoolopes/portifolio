@@ -1,5 +1,5 @@
 <template>
-  <section id="task-list" class="card ps-3 py-2 w-100">
+  <section v-if="tasksEmpty" id="task-list" class="card ps-3 py-2 w-100">
     <div v-for="task in tasks" :key="task.id" class="input-group my-2">
       <!-- <span class="p-2 input-group-id">
         {{ task.id }}
@@ -52,6 +52,10 @@ export default {
       }
 
       return this.$store.getters.getTasks;
+    },
+    
+    tasksEmpty() {
+      return this.tasks.length > 0;
     },
   },
 

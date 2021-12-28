@@ -8,6 +8,7 @@
       <TaskFilter />
       <FormTask />
       <TaskList />
+      <TaskAlert />
     </Main>
 
     <Footer />
@@ -21,6 +22,8 @@ import Main from "../components/communs/Main.vue";
 import TaskFilter from "../components/TaskFilter.vue";
 import FormTask from "../components/FormTask.vue";
 import TaskList from "../components/TaskList.vue";
+import TaskAlert from "../components/TaskAlert.vue";
+
 export default {
   name: "Task",
 
@@ -28,7 +31,15 @@ export default {
     isMounted: false,
   }),
 
-  components: { Header, Footer, Main, TaskFilter, FormTask, TaskList },
+  components: {
+    Header,
+    Footer,
+    Main,
+    TaskFilter,
+    FormTask,
+    TaskList,
+    TaskAlert,
+  },
 
   computed: {
     isLogged() {
