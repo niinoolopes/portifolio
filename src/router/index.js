@@ -10,9 +10,9 @@ const routes = [
     component: () => import("../views/Home.vue"),
   },
   {
-    path: "/painel",
-    name: "Painel",
-    component: () => import("../views/Painel.vue"),
+    path: "/task",
+    name: "Task",
+    component: () => import("../views/Task.vue"),
   },
 ];
 
