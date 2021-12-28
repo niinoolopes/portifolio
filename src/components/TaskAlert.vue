@@ -1,8 +1,8 @@
 <template>
   <div v-show="tasksListEmpty || tasksEmpty" class="card ps-3 py-2 w-100">
     <p class="m-0">
-      <span v-show="tasksListEmpty">lista vazia</span>
-      <span v-show="tasksEmpty">Cadastre uma tarefa</span>
+      <span v-if="tasksEmpty">Cadastre uma tarefa</span>
+      <span v-else-if="tasksListEmpty">lista vazia</span>
     </p>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
       if (this.getFilter === "disable") {
         return this.$store.getters.getTasksDisable.length === 0;
       }
+
       return false;
     },
 
