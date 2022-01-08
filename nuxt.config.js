@@ -2,6 +2,8 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  srcDir: 'src/',
+  
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -35,6 +37,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // '@nuxtjs/style-resources',
+    '@nuxtjs/fontawesome'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -45,5 +49,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  fontawesome: {
+    icons: {
+      solid: true,
+      brands: true,
+    }
+  },
+
 }
