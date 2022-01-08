@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'p-nuxt-firebase-lista',
+    title: 'p-nuxt2-firebase-lista',
     htmlAttrs: {
       lang: 'en'
     },
@@ -49,6 +49,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    publicPath: 'https://qa.nicetry.com/apps/nuxt'
   },
 
   fontawesome: {
