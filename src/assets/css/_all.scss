@@ -1,0 +1,16 @@
+.h-100vh {
+    height: 100vh;
+}
+
+.w-100vw {
+    width: 100vw;
+}
+
+#app {
+    @extend .h-100vh;
+    @extend .w-100vw;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
